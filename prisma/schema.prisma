@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./sqlite.db"
+}
+
+model Business {
+  id String @id @default(uuid()) @unique
+  Name  String
+  CompanyName  String
+  Cpf_cnpj String @unique
+  Domain  String?
+  MailDefault  String
+  MailSuport  String?
+  MailPagament  String?
+  MailNoreply  String?
+  Users User[]
+  Clients Client[]
+  Agendas Agenda[]
+  Appintments Appointments[]
+}
+
+model User {
+  id String @id @default(uuid()) @unique
+  Business Business @relation(fields: [idBusiness], references: [id])
+  idBusiness String
+  UserPermissions UserPermissions @relation(fields: [idUserPermission], references: [id])
+  idUserPermission Int
+  Name String
+  Birthday String
+  Cpf_cnpj String @unique
+  Phone String @unique
+  Email  String @unique
+  Password String
+  Agendas Agenda[]
+}
+
+model UserPermissions {
+  id Int @unique
+  Description String
+  Users User[]
+}
+
+model Client {
+  id String @id @default(uuid()) @unique
+  Business Business @relation(fields: [idBusiness], references: [id])
+  idBusiness String
+  Phone String @unique
+  Email  String @unique
+  Name String
+  Birthday String
+  Address String
+  Password String
+  CheckMail Boolean
+  Balance String
+  Appintments Appointments[]
+}
+
+model Agenda {
+  id String @id @default(uuid()) @unique
+  Business Business @relation(fields: [idBusiness], references: [id])
+  idBusiness String
+  User User @relation(fields: [idUser], references: [id])
+  idUser String
+  Name String
+  Colors String
+}
+
+model Appointments {
+  id String @id @default(uuid()) @unique
+  Business Business @relation(fields: [idBusiness], references: [id])
+  idBusiness String
+  Client Client @relation(fields: [idClient], references: [id])
+  idClient String
+  Data String
+  Request Boolean
+}
