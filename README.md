@@ -1,4 +1,4 @@
-<h1 align="center">Template-nodejs-typescript-dev</h1>
+<h1 align="center">agendator-manager</h1>
 
 <p align="center">
   <a href="#about">Sobre este projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -25,9 +25,11 @@ Template para criação de projetos em nodejs usando typescript e testes automat
 
 <div id="recursos"></div>
 
-- [x] Configuração para Typescript
-- [x] Configuração para modules
-- [x] Configuração para Testes unitarios
+- [ ] Criar User(Adm)
+- [ ] Criar Agenda
+- [ ] Criação de Client/ Edição
+- [ ] Client solicitar agendamento em uma agenda
+- [ ] User Confirmar agendamento
 
 ## License
 
