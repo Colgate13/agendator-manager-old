@@ -1,4 +1,4 @@
-<h1 align="center">agendator-manager</h1>
+<h1 align="center">Agendator-manager</h1>
 
 <p align="center">
   <a href="#about">Sobre este projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -11,7 +11,7 @@
 
 <div id="about"></div>
 
-Template para criação de projetos em nodejs usando typescript e testes automatizados.
+Projec agendator manager for business.
 
 ## Tecnologias 🐱‍🏍🎂
 
