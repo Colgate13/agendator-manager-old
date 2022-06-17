@@ -1,7 +1,7 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
 import { business } from '../Domain/Business';
 import { BusinessRepository, IBusinessRepository, Business } from '../Repositories/BusinessRepository';
-import { IBusiness } from '../Interfaces/Domain/index';
+import { IBusiness } from '../Interfaces/IDomain/index';
 
 export class CreateBusiness {
 

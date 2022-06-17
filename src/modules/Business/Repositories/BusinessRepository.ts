@@ -1,6 +1,6 @@
 import { business } from '../Domain/Business';
-import { IBusinessRepository } from '../Interfaces/Repositories/index';
-export { IBusinessRepository } from '../Interfaces/Repositories/index';
+import { IBusinessRepository } from '../Interfaces/IRepositories/index';
+export { IBusinessRepository } from '../Interfaces/IRepositories/index';
 import { PrismaClient, Business } from '../infra/Prisma';
 export { Business } from '../infra/Prisma';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
