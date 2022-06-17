@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "agendator-manager",
   "version": "1.0.0",
   "description": "Projec agendator manager for business",
   "keywords": [],
@@ -22,7 +22,7 @@
     "prisma:createOnly": "npx prisma migrate dev --create-only",
     "prisma:deploy": "npx prisma migrate deploy",
     "start": "node dist/server.js",
-    "test": "jest",
+    "test": "jest --maxWorkers=4",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll --maxWorkers=1",
     "test:clear": "jest --clearCache"
