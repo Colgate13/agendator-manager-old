@@ -1,13 +1,13 @@
 import { business } from '../Domain/Business';
-import { IBusinessRepository } from '../Interfaces/Repositories/index';
-export { IBusinessRepository } from '../Interfaces/Repositories/index';
-import { PrismaClient, Business } from '../infra/Prisma';
-export { Business } from '../infra/Prisma';
+import { IBusinessRepository } from '../Interfaces/IRepositories';
+import { PrismaClient, Business } from '../../../shared/infra/Prisma';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
+export { IBusinessRepository } from '../Interfaces/IRepositories';
+export { Business } from '../../../shared/infra/Prisma';
 
-export class BusinessRepository implements IBusinessRepository{
+export class BusinessRepository implements IBusinessRepository {
     private prisma: PrismaClient;
-    
+
     constructor(ClinetDbStrategy: PrismaClient = new PrismaClient()) {
         this.prisma = ClinetDbStrategy;
     }
@@ -34,5 +34,5 @@ export class BusinessRepository implements IBusinessRepository{
         return Business;
     }
 
-    
+
 }

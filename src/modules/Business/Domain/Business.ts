@@ -1,5 +1,5 @@
-import { IBusiness } from '../Interfaces/Domain/index';
-export { IBusiness } from '../Interfaces/Domain/index';
+import { IBusiness } from '../Interfaces/IDomain/index';
+export { IBusiness } from '../Interfaces/IDomain/index';
 import { ErrorApp } from '../../../shared/Errors/Errors';
 
 export class business {

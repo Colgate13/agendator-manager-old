@@ -11,73 +11,95 @@ datasource db {
 }
 
 model Business {
-  id String @id @default(uuid()) @unique
-  Name  String
+  id           String         @id @unique @default(uuid())
+  Name         String
   CompanyName  String
-  Cpf_cnpj String @unique
-  Domain  String?
+  Cpf_cnpj     String         @unique
+  Domain       String?
   MailDefault  String
-  MailSuport  String?
-  MailPagament  String?
+  MailSuport   String?
+  MailPagament String?
   MailNoreply  String?
-  Users User[]
-  Clients Client[]
-  Agendas Agenda[]
-  Appintments Appointments[]
+  Users        User[]
+  Clients      Client[]
+  Agendas      Agenda[]
+  Appintments  Appointments[]
+  Services     Service[]
 }
 
 model User {
-  id String @id @default(uuid()) @unique
-  Business Business @relation(fields: [idBusiness], references: [id])
-  idBusiness String
-  UserPermissions UserPermissions @relation(fields: [idUserPermission], references: [id])
+  id               String          @id @unique @default(uuid())
+  Business         Business        @relation(fields: [idBusiness], references: [id])
+  idBusiness       String
+  UserPermissions  UserPermissions @relation(fields: [idUserPermission], references: [id])
   idUserPermission Int
-  Name String
-  Birthday String
-  Cpf_cnpj String @unique
-  Phone String @unique
-  Email  String @unique
-  Password String
-  Agendas Agenda[]
+  Name             String
+  Birthday         String
+  Cpf_cnpj         String          @unique
+  Phone            String          @unique
+  Email            String          @unique
+  Password         String
+  Agendas          Agenda[]
+  Services         Service[]
 }
 
 model UserPermissions {
-  id Int @unique
+  id          Int    @unique
   Description String
-  Users User[]
+  Users       User[]
 }
 
 model Client {
-  id String @id @default(uuid()) @unique
-  Business Business @relation(fields: [idBusiness], references: [id])
-  idBusiness String
-  Phone String @unique
-  Email  String @unique
-  Name String
-  Birthday String
-  Address String
-  Password String
-  CheckMail Boolean
-  Balance String
+  id          String         @id @unique @default(uuid())
+  Business    Business       @relation(fields: [idBusiness], references: [id])
+  idBusiness  String
+  Phone       String         @unique
+  Email       String         @unique
+  Name        String
+  Birthday    String
+  Address     String
+  Password    String
+  CheckMail   Boolean
+  Balance     String
   Appintments Appointments[]
 }
 
 model Agenda {
-  id String @id @default(uuid()) @unique
-  Business Business @relation(fields: [idBusiness], references: [id])
-  idBusiness String
-  User User @relation(fields: [idUser], references: [id])
-  idUser String
-  Name String
-  Colors String
+  id           String         @id @unique @default(uuid())
+  Business     Business       @relation(fields: [idBusiness], references: [id])
+  idBusiness   String
+  User         User           @relation(fields: [idUser], references: [id])
+  idUser       String
+  Name         String
+  Colors       String
+  Services     Service[]
+  Appointments Appointments[]
+}
+
+model Service {
+  id           String         @id @unique @default(uuid())
+  Business     Business       @relation(fields: [idBusiness], references: [id])
+  idBusiness   String
+  User         User           @relation(fields: [idUser], references: [id])
+  idUser       String
+  Agenda       Agenda         @relation(fields: [agendaId], references: [id])
+  agendaId     String
+  Description  String
+  DurationTime String
+  Price        String
+  Appointments Appointments[]
 }
 
 model Appointments {
-  id String @id @default(uuid()) @unique
-  Business Business @relation(fields: [idBusiness], references: [id])
+  id         String   @id @unique @default(uuid())
+  Business   Business @relation(fields: [idBusiness], references: [id])
   idBusiness String
-  Client Client @relation(fields: [idClient], references: [id])
-  idClient String
-  Data String
-  Request Boolean
+  Client     Client   @relation(fields: [idClient], references: [id])
+  Agenda     Agenda   @relation(fields: [agendaId], references: [id])
+  agendaId   String
+  idClient   String
+  Data       String
+  Request    Boolean
+  Service    Service? @relation(fields: [serviceId], references: [id])
+  serviceId  String?
 }
