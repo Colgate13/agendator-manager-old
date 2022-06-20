@@ -1,7 +1,7 @@
 import { user } from '../Domain/User';
-import { IUserRepository } from '../Interface/Repositories';
+import { IUserRepository } from '../Interfaces/Repositories';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
-export { IUserRepository } from '../Interface/Repositories';
+export { IUserRepository } from '../Interfaces/Repositories';
 export { User } from '../../../shared/infra/Prisma';
 import { User } from '../../../shared/infra/Prisma';
 import { PrismaClient } from '../../../shared/infra/Prisma';

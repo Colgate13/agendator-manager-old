@@ -1,6 +1,6 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
-import { IUser } from '../Interface/Domain';
-export { IUser } from '../Interface/Domain';
+import { IUser } from '../Interfaces/Domain';
+export { IUser } from '../Interfaces/Domain';
 
 export class user {
 

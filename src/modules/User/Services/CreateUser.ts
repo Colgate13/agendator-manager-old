@@ -1,7 +1,7 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
 import { user } from '../Domain/User';
 import { UserRepository, IUserRepository, User } from '../Repositories/UserRepository';
-import { IUser } from '../Interface/Domain';
+import { IUser } from '../Interfaces/Domain';
 
 export class CreateUser {
 
