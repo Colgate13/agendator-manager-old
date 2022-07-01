@@ -13,17 +13,9 @@ export class ServiceRepository implements IServiceRepository {
     this.prisma = ClinetDbStrategy;
   }
 
-  async create(service: service): Promise<Service | ErrorsDb> {
+  async create(service: Service): Promise<Service | ErrorsDb> {
     const Service = await this.prisma.service.create({
-      data: {
-        id: service.id,
-        idBusiness: service.idBusiness,
-        idUser: service.idUser,
-        agendaId: service.agendaId,
-        Description: service.Description,
-        DurationTime: service.DurationTime,
-        Price: service.Price,
-      }
+      data: service
     });
 
     if (!Service) {

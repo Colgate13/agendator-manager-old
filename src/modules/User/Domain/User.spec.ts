@@ -6,7 +6,6 @@ describe('User', () => {
 
     const UserProps: IUser = {
       id: '123456789',
-      idBusiness: '123456789',
       idUserPermission: 1,
       Name: 'Teste User',
       Birthday: '01/01/2000',
@@ -23,7 +22,6 @@ describe('User', () => {
     }
 
     expect(User.id).toEqual('123456789');
-    expect(User.idBusiness).toEqual('123456789');
     expect(User.idUserPermission).toEqual(1);
     expect(User.Name).toEqual('Teste User');
     expect(User.Birthday).toEqual('01/01/2000');
@@ -38,7 +36,6 @@ describe('User', () => {
 
     const userProps: IUser = {
       id: '12',
-      idBusiness: '123456789',
       idUserPermission: 1,
       Name: 'Teste User',
       Birthday: '123456789',

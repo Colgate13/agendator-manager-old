@@ -13,20 +13,9 @@ export class UserRepository implements IClientRepository {
     this.prisma = ClinetDbStrategy;
   }
 
-  async create(client: client): Promise<Client | ErrorsDb> {
+  async create(client: Client): Promise<Client | ErrorsDb> {
     const Client = await this.prisma.client.create({
-      data: {
-        id: client.id,
-        idBusiness: client.idBusiness,
-        Phone: client.Phone,
-        Email: client.Email,
-        Name: client.Name,
-        Birthday: client.Birthday,
-        Address: client.Address,
-        Password: client.Password,
-        CheckMail: client.CheckMail,
-        Balance: client.Balance
-      }
+      data: client
     });
 
     if (!Client) {

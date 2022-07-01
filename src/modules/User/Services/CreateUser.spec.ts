@@ -6,15 +6,7 @@ describe('Create a Business with service', () => {
   const mocks = {
     RepositoryStrategy: {
       create: ((data: any) => {
-        return {
-          id: data.id,
-          idBusiness: data.idBusiness,
-          idUserPermission: data.idUserPermission,
-          Name: data.Name,
-          Phone: data.Phone,
-          Email: data.Email,
-          Password: data.Password
-        };
+        return data;
       })
     }
   }
@@ -31,7 +23,6 @@ describe('Create a Business with service', () => {
 
     const creatingUser = await userCreate.create.apply(mocks, [{
       id: '123456789',
-      idBusiness: '123456789',
       idUserPermission: 1,
       Name: 'Teste User',
       Birthday: '123456789',
@@ -51,7 +42,6 @@ describe('Create a Business with service', () => {
     try {
       await userCreate.create.apply(mocks, [{
         id: '12',
-        idBusiness: '123456789',
         idUserPermission: 1,
         Name: 'Teste User',
         Birthday: '123456789',
@@ -72,7 +62,6 @@ describe('Create a Business with service', () => {
     try {
       await userCreate.create.apply(mocks2, [{
         id: '123456789',
-        idBusiness: '123456789',
         idUserPermission: 1,
         Name: 'Teste User',
         Birthday: '123456789',

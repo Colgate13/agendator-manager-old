@@ -1,18 +1,18 @@
 import { CreateUser } from './Services/CreateUser';
+import { v4 as uuidv4 } from 'uuid';
 
 (async () => {
 
   const createUser = new CreateUser();
 
   await createUser.create({
-    id: '123456789',
-    idBusiness: '123456789',
+    id: `${uuidv4()}`,
     idUserPermission: 1,
-    Name: 'Teste User',
-    Birthday: '123456789',
-    Cpf_cnpj: '450.870.500-69',
-    Phone: '123456789',
-    Email: 'user@gmail.com',
+    Name: 'Franncy Neya Brasil Feitosa',
+    Birthday: '07-10-1978',
+    Cpf_cnpj: '65143480094',
+    Phone: '5563984082891',
+    Email: 'franncy@gmail.com',
     Password: '123456789'
   });
 })();

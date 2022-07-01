@@ -6,12 +6,13 @@ describe('Appointments', () => {
 
     const AppointmentsProps: IAppointments = {
       id: '123456789',
-      idBusiness: '123456789',
-      agendaId: '123456789',
       idClient: '123456789',
-      serviceId: '123456789',
-      Data: '13-05-2020 10:00 AM',
-      Request: false
+      idService: '123456789',
+      Day: 1,
+      Month: 1,
+      Year: 2023,
+      Hour: '20:00',
+      Status: 0
     }
 
     const Appointments = appointments.create(AppointmentsProps);
@@ -21,11 +22,7 @@ describe('Appointments', () => {
     }
 
     expect(Appointments.id).toEqual('123456789');
-    expect(Appointments.idBusiness).toEqual('123456789');
-    expect(Appointments.agendaId).toEqual('123456789');
     expect(Appointments.idClient).toEqual('123456789');
-    expect(Appointments.serviceId).toEqual('123456789');
-    expect(Appointments.Data).toEqual('13-05-2020 10:00 AM');
-    expect(Appointments.Request).toEqual(false);
+    expect(Appointments.idService).toEqual('123456789');
   });
 })
