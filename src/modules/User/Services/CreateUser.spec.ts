@@ -22,7 +22,6 @@ describe('Create a Business with service', () => {
   it('should create a user with service', async () => {
 
     const creatingUser = await userCreate.create.apply(mocks, [{
-      id: '123456789',
       idUserPermission: 1,
       Name: 'Teste User',
       Birthday: '123456789',
@@ -32,7 +31,7 @@ describe('Create a Business with service', () => {
       Password: '123456789'
     }]);
 
-    expect(creatingUser.id).toBe('123456789');
+    expect(creatingUser.Name).toBe('Teste User');
 
   });
 
@@ -41,7 +40,6 @@ describe('Create a Business with service', () => {
 
     try {
       await userCreate.create.apply(mocks, [{
-        id: '12',
         idUserPermission: 1,
         Name: 'Teste User',
         Birthday: '123456789',
@@ -61,7 +59,6 @@ describe('Create a Business with service', () => {
 
     try {
       await userCreate.create.apply(mocks2, [{
-        id: '123456789',
         idUserPermission: 1,
         Name: 'Teste User',
         Birthday: '123456789',

@@ -1,5 +1,16 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
 import { UserRepository, IUserRepository, User } from '../Repositories/UserRepository';
+import { v4 as uuidv4 } from 'uuid';
+
+interface IUserCreate  {
+  Name: string
+  Birthday: string
+  Cpf_cnpj: string
+  Phone: string
+  Email: string
+  Password: string
+  idUserPermission: number;
+}
 
 export class CreateUser {
 
@@ -9,15 +20,22 @@ export class CreateUser {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(userProps: User): Promise<User> {
+  async create(userProps: IUserCreate): Promise<User> {
 
-    const UserStorage = await this.RepositoryStrategy.create(userProps);
+    const user: User = {
+      id: uuidv4(),
+      ...userProps
+    }
+
+    const UserStorage = await this.RepositoryStrategy.create(user).catch((Error: any) => {
+      console.log(Error)
+    });
 
     if (!UserStorage) {
       throw new Error('User not created into storage');
     }
 
-    return userProps;
+    return user;
   }
 
 }
