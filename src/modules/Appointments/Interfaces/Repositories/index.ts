@@ -1,7 +1,17 @@
-import { Appointments } from "@prisma/client";
+import { Appointments, PrismaClient } from "@prisma/client";
 import { ErrorsDb } from "../../../../shared/Errors/ErrorsDb";
-import { IAppointments } from "../Domain";
+
+export interface IfindAppointmens {
+  Day: number,
+  Month: number,
+  Year: number,
+  Service: {
+    idUser: string
+  }
+}
 
 export interface IAppointmentsRepository {
-  create(Appointments: IAppointments): Promise<Appointments | ErrorsDb>;
+  orm: PrismaClient;
+  create(Appointments: Appointments): Promise<Appointments | ErrorsDb>;
+  findAppointments(Props: IfindAppointmens): Promise<Appointments[]>
 }

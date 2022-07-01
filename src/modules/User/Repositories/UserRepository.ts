@@ -1,4 +1,3 @@
-import { user } from '../Domain/User';
 import { IUserRepository } from '../Interfaces/Repositories';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
 export { IUserRepository } from '../Interfaces/Repositories';

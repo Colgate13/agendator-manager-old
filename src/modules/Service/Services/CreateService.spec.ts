@@ -31,14 +31,14 @@ describe('Create a Service with service', () => {
       id: '1233456789',
       idUser: '1233456789',
       Description: 'Cabelo e Barba',
-      DurationTime: 20,
+      DurationTime: "02:00",
       Price: 20,
     }]);
 
     expect(creatingService.id).toBe('1233456789');
     expect(creatingService.idUser).toBe('1233456789');
     expect(creatingService.Description).toBe('Cabelo e Barba');
-    expect(creatingService.DurationTime).toBe(20);
+    expect(creatingService.DurationTime).toBe("02:00");
     expect(creatingService.Price).toBe(20);
 
   });
