@@ -2,6 +2,7 @@ import { ErrorApp } from '../../../shared/Errors/Errors';
 import { appointments } from '../Domain/Appointments';
 import { IAppointments } from '../Interfaces/Domain';
 import { Appointments, AppointmentsRepository, IAppointmentsRepository } from '../Repositories/AppointmentsRepository';
+import { startOfHour, isBefore, getHours, format } from 'date-fns';
 
 export class CreateAppointments {
 

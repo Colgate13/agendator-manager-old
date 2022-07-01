@@ -12,17 +12,9 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     this.prisma = ClinetDbStrategy;
   }
 
-  async create(appointments: appointments): Promise<Appointments | ErrorsDb> {
+  async create(appointments: Appointments): Promise<Appointments | ErrorsDb> {
     const Appointments = await this.prisma.appointments.create({
-      data: {
-        id: appointments.id,
-        idBusiness: appointments.idBusiness,
-        agendaId: appointments.agendaId,
-        idClient: appointments.idClient,
-        serviceId: appointments.serviceId || "0",
-        Data: appointments.Data,
-        Request: appointments.Request
-      }
+      data: appointments
     });
 
     if (!Appointments) {

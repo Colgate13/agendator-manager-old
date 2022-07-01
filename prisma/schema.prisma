@@ -10,27 +10,8 @@ datasource db {
   url      = "file:./sqlite.db"
 }
 
-model Business {
-  id           String         @id @unique @default(uuid())
-  Name         String
-  CompanyName  String
-  Cpf_cnpj     String         @unique
-  Domain       String?
-  MailDefault  String
-  MailSuport   String?
-  MailPagament String?
-  MailNoreply  String?
-  Users        User[]
-  Clients      Client[]
-  Agendas      Agenda[]
-  Appintments  Appointments[]
-  Services     Service[]
-}
-
 model User {
   id               String          @id @unique @default(uuid())
-  Business         Business        @relation(fields: [idBusiness], references: [id])
-  idBusiness       String
   UserPermissions  UserPermissions @relation(fields: [idUserPermission], references: [id])
   idUserPermission Int
   Name             String
@@ -39,7 +20,6 @@ model User {
   Phone            String          @unique
   Email            String          @unique
   Password         String
-  Agendas          Agenda[]
   Services         Service[]
 }
 
@@ -50,56 +30,34 @@ model UserPermissions {
 }
 
 model Client {
-  id          String         @id @unique @default(uuid())
-  Business    Business       @relation(fields: [idBusiness], references: [id])
-  idBusiness  String
-  Phone       String         @unique
-  Email       String         @unique
-  Name        String
-  Birthday    String
-  Address     String
-  Password    String
-  CheckMail   Boolean
-  Balance     String
-  Appintments Appointments[]
-}
-
-model Agenda {
   id           String         @id @unique @default(uuid())
-  Business     Business       @relation(fields: [idBusiness], references: [id])
-  idBusiness   String
-  User         User           @relation(fields: [idUser], references: [id])
-  idUser       String
+  Phone        String         @unique
+  Email        String         @unique
   Name         String
-  Colors       String
-  Services     Service[]
+  Birthday     String
+  Password     String
   Appointments Appointments[]
 }
 
 model Service {
   id           String         @id @unique @default(uuid())
-  Business     Business       @relation(fields: [idBusiness], references: [id])
-  idBusiness   String
   User         User           @relation(fields: [idUser], references: [id])
   idUser       String
-  Agenda       Agenda         @relation(fields: [agendaId], references: [id])
-  agendaId     String
   Description  String
-  DurationTime String
-  Price        String
+  DurationTime Float
+  Price        Float
   Appointments Appointments[]
 }
 
 model Appointments {
-  id         String   @id @unique @default(uuid())
-  Business   Business @relation(fields: [idBusiness], references: [id])
-  idBusiness String
-  Client     Client   @relation(fields: [idClient], references: [id])
-  Agenda     Agenda   @relation(fields: [agendaId], references: [id])
-  agendaId   String
-  idClient   String
-  Data       String
-  Request    Boolean
-  Service    Service? @relation(fields: [serviceId], references: [id])
-  serviceId  String?
+  id        String  @id @unique @default(uuid())
+  idClient  String
+  idService String
+  Year      Int
+  Day       Int
+  Month     Int
+  Hour      String
+  Status    Int
+  Service   Service @relation(fields: [idService], references: [id])
+  Client    Client  @relation(fields: [idClient], references: [id])
 }

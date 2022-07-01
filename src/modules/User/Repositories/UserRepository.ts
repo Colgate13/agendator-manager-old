@@ -13,19 +13,9 @@ export class UserRepository implements IUserRepository {
     this.prisma = ClinetDbStrategy;
   }
 
-  async create(user: user): Promise<User | ErrorsDb> {
+  async create(user: User): Promise<User | ErrorsDb> {
     const User = await this.prisma.user.create({
-      data: {
-        id: user.id,
-        idBusiness: user.idBusiness,
-        idUserPermission: user.idUserPermission,
-        Name: user.Name,
-        Birthday: user.Birthday,
-        Cpf_cnpj: user.Cpf_cnpj,
-        Phone: user.Phone,
-        Email: user.Email,
-        Password: user.Password
-      }
+      data: user
     });
 
     if (!User) {

@@ -1,6 +1,5 @@
 export interface IUser {
   id: string;
-  idBusiness: string;
   idUserPermission: number;
   Name: string;
   Birthday: string;
