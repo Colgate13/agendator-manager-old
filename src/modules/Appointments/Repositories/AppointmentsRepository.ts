@@ -1,19 +1,20 @@
-import { appointments } from '../Domain/Appointments';
-import { IAppointmentsRepository } from '../Interfaces/Repositories';
+import { IAppointmentsRepository, IfindAppointmens } from '../Interfaces/Repositories';
 import { PrismaClient, Appointments } from '../../../shared/infra/Prisma';
+
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
+
 export { IAppointmentsRepository } from '../Interfaces/Repositories';
 export { Appointments } from '../../../shared/infra/Prisma';
 
 export class AppointmentsRepository implements IAppointmentsRepository {
-  private prisma: PrismaClient;
+  public orm: PrismaClient;
 
   constructor(ClinetDbStrategy: PrismaClient = new PrismaClient()) {
-    this.prisma = ClinetDbStrategy;
+    this.orm = ClinetDbStrategy;
   }
 
   async create(appointments: Appointments): Promise<Appointments | ErrorsDb> {
-    const Appointments = await this.prisma.appointments.create({
+    const Appointments = await this.orm.appointments.create({
       data: appointments
     });
 
@@ -22,5 +23,18 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     }
 
     return Appointments;
+  }
+
+  async findAppointments(Props: IfindAppointmens): Promise<Appointments[]> {
+    return this.orm.appointments.findMany({
+      where: {
+        Day: Props.Day,
+        Month: Props.Month,
+        Year: Props.Year,
+        Service: {
+          idUser: Props.Service.idUser
+        }
+      }
+    })
   }
 }

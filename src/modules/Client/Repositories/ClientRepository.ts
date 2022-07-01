@@ -1,4 +1,3 @@
-import { client } from '../Domain/Client';
 import { IClientRepository } from '../Interfaces/Repositories';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
 import { Client } from '../../../shared/infra/Prisma';

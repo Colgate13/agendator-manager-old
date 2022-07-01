@@ -1,6 +1,4 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
-import { service } from '../Domain/Service';
-import { IService } from '../Interfaces/Domain';
 import { IServiceRepository, Service, ServiceRepository } from '../Repositories/ServiceRepository';
 
 export class CreateService {
@@ -11,21 +9,15 @@ export class CreateService {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(ServiceProps: IService): Promise<Service> {
+  async create(ServiceProps: Service): Promise<Service> {
 
-    const Service = service.create(ServiceProps);
-
-    if (Service instanceof ErrorApp) {
-      throw new Error('Service not created, invalid props');
-    }
-
-    const ServiceStorage = await this.RepositoryStrategy.create(Service);
+    const ServiceStorage = await this.RepositoryStrategy.create(ServiceProps);
 
     if (!ServiceStorage) {
       throw new Error('Service not created into storage');
     }
 
-    return Service;
+    return ServiceProps;
   }
 
 }

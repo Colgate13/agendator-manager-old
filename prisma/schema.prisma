@@ -44,7 +44,7 @@ model Service {
   User         User           @relation(fields: [idUser], references: [id])
   idUser       String
   Description  String
-  DurationTime Float
+  DurationTime String
   Price        Float
   Appointments Appointments[]
 }
@@ -58,6 +58,8 @@ model Appointments {
   Month     Int
   Hour      String
   Status    Int
+  Startime  String
+  EndTime   String
   Service   Service @relation(fields: [idService], references: [id])
   Client    Client  @relation(fields: [idClient], references: [id])
 }

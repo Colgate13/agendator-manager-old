@@ -1,5 +1,4 @@
 import { IServiceRepository } from '../Interfaces/Repositories';
-import { service } from '../Domain/Service';
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
 import { Service } from '../../../shared/infra/Prisma';
 import { PrismaClient } from '../../../shared/infra/Prisma';

@@ -1,7 +1,5 @@
 import { ErrorApp } from '../../../shared/Errors/Errors';
-import { user } from '../Domain/User';
 import { UserRepository, IUserRepository, User } from '../Repositories/UserRepository';
-import { IUser } from '../Interfaces/Domain';
 
 export class CreateUser {
 
@@ -11,21 +9,15 @@ export class CreateUser {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(userProps: IUser): Promise<User> {
+  async create(userProps: User): Promise<User> {
 
-    const User = user.create(userProps);
-
-    if (User instanceof ErrorApp) {
-      throw new Error('User not created, invalid props');
-    }
-
-    const UserStorage = await this.RepositoryStrategy.create(User);
+    const UserStorage = await this.RepositoryStrategy.create(userProps);
 
     if (!UserStorage) {
       throw new Error('User not created into storage');
     }
 
-    return User;
+    return userProps;
   }
 
 }
