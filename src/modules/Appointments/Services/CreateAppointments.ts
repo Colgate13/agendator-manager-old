@@ -53,7 +53,11 @@ export class CreateAppointments {
     
     AppoitmentsDatabase.forEach((AppoitmentDatabase) => {
 
-      if (AppoitmentDatabase.Day === AppointmentsProps.Day && AppoitmentDatabase.Month === AppointmentsProps.Month && AppoitmentDatabase.Year === AppointmentsProps.Year) {
+      if (
+        AppoitmentDatabase.Day === AppointmentsProps.Day 
+        && AppoitmentDatabase.Month === AppointmentsProps.Month 
+        && AppoitmentDatabase.Year === AppointmentsProps.Year
+      ) {
 
         if (
           (
