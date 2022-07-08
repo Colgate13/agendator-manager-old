@@ -58,7 +58,7 @@ model Appointments {
   Month     Int
   Hour      String
   Status    Int
-  Startime  String
+  StartTime String
   EndTime   String
   Service   Service @relation(fields: [idService], references: [id])
   Client    Client  @relation(fields: [idClient], references: [id])

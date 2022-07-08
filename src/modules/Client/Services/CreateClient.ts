@@ -9,12 +9,12 @@ export class CreateClient {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(ClientProps: Client): Promise<Client> {
+  async create(ClientProps: Client): Promise<Client | ErrorApp> {
 
     const ClientStorage = await this.RepositoryStrategy.create(ClientProps);
 
     if (!ClientStorage) {
-      throw new Error('Client not created into storage');
+      return new ErrorApp('Client not persist into storage');
     }
 
     return ClientProps;

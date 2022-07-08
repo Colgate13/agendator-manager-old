@@ -1,3 +1,4 @@
+import { ErrorApp } from '../../../shared/Errors/Errors';
 import { CreateService } from './CreateService';
 
 describe('Create a Service with service', () => {
@@ -34,6 +35,10 @@ describe('Create a Service with service', () => {
       DurationTime: "02:00",
       Price: 20,
     }]);
+
+    if (creatingService instanceof ErrorApp) {
+      throw new Error();
+    }
 
     expect(creatingService.id).toBe('1233456789');
     expect(creatingService.idUser).toBe('1233456789');

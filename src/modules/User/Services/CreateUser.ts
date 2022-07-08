@@ -1,8 +1,8 @@
-import { ErrorApp } from '../../../shared/Errors/Errors';
+import { ErrorApp, Errors } from '../../../shared/Errors/Errors';
 import { UserRepository, IUserRepository, User } from '../Repositories/UserRepository';
 import { v4 as uuidv4 } from 'uuid';
 
-interface IUserCreate  {
+interface IUserCreate {
   Name: string
   Birthday: string
   Cpf_cnpj: string
@@ -20,19 +20,18 @@ export class CreateUser {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(userProps: IUserCreate): Promise<User> {
+  async create(userProps: IUserCreate): Promise<User | ErrorApp> {
 
     const user: User = {
       id: uuidv4(),
       ...userProps
     }
 
-    const UserStorage = await this.RepositoryStrategy.create(user).catch((Error: any) => {
-      console.log(Error)
-    });
+    const UserStorage = await this.RepositoryStrategy.create(user);
 
-    if (!UserStorage) {
-      throw new Error('User not created into storage');
+    if (!UserStorage || UserStorage instanceof ErrorApp) {
+      console.log("Oi")
+      return new ErrorApp('User-' + Errors.services.persist.message, Errors.services.persist.code);
     }
 
     return user;
