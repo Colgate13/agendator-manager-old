@@ -1,18 +1,11 @@
 import dotenv from 'dotenv';
-import ServerHttp from './infra/http/server';
 
 dotenv.config();
 
 process.env.TZ = 'Brazil/Sao_paulo';
-process.title = 'agadcep - server';
-
-const serverHttp = new ServerHttp(process.env.PORT || '5000');
-
-serverHttp.init();
 
 process.on('SIGTERM', () => {
   console.log('> Server ending after close all connections - ', new Date().toISOString());
-  serverHttp.close(() => process.exit());
 });
 
 process.on('SIGINT', () => {

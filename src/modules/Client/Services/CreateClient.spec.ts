@@ -1,3 +1,4 @@
+import { ErrorApp } from '../../../shared/Errors/Errors';
 import { CreateClient } from './CreateClient';
 
 describe('Create a Business with service', () => {
@@ -36,6 +37,10 @@ describe('Create a Business with service', () => {
       Birthday: '123',
       Password: '123'
     }]);
+
+    if (creatingBusiness instanceof ErrorApp) {
+      throw new Error();
+    }
 
     expect(creatingBusiness.id).toBe('123456789');
 

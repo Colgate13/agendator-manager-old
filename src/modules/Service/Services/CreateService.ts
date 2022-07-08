@@ -9,12 +9,12 @@ export class CreateService {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(ServiceProps: Service): Promise<Service> {
+  async create(ServiceProps: Service): Promise<Service | ErrorApp> {
 
     const ServiceStorage = await this.RepositoryStrategy.create(ServiceProps);
 
     if (!ServiceStorage) {
-      throw new Error('Service not created into storage');
+      return new ErrorApp('Service not created into storage');
     }
 
     return ServiceProps;

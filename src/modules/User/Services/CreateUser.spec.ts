@@ -1,3 +1,4 @@
+import { ErrorApp } from '../../../shared/Errors/Errors';
 import { CreateUser } from './CreateUser';
 
 describe('Create a Business with service', () => {
@@ -30,6 +31,10 @@ describe('Create a Business with service', () => {
       Email: 'user@gmail.com',
       Password: '123456789'
     }]);
+
+    if (creatingUser instanceof ErrorApp) {
+      throw new Error();
+    }
 
     expect(creatingUser.Name).toBe('Teste User');
 

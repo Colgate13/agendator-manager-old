@@ -51,43 +51,43 @@ describe('Create a Appointments with service', () => {
       orm: {
         appointments: {
           findMany: (data: any) => {
-             return [
-                {
-                  id: '49559231-8b89-4d41-bcb0-1421ebf96531',
-                  idClient: 'c2e1160e-6bca-4a18-9291-94d04f243160',
-                  idService: 'c8fd6b87-fab0-4418-97ea-3deff0baa63b',
-                  Year: 2022,
-                  Day: 1,
-                  Month: 1,
-                  Hour: '08:00',
-                  Status: 1,
-                  Startime: 'Sat Jan 01 2022 08:00:00 GMT-0300 (Brasilia Standard Time)',
-                  EndTime: 'Sat Jan 01 2022 10:00:00 GMT-0300 (Brasilia Standard Time)'
-                },
-                {
-                  id: '5411c2f1-83a0-4978-83e3-df362d15c625',
-                  idClient: 'c2e1160e-6bca-4a18-9291-94d04f243160',
-                  idService: 'c8fd6b87-fab0-4418-97ea-3deff0baa63b',
-                  Year: 2022,
-                  Day: 1,
-                  Month: 1,
-                  Hour: '08:00',
-                  Status: 1,
-                  Startime: 'Sat Jan 01 2022 10:00:00 GMT-0300 (Brasilia Standard Time)',
-                  EndTime: 'Sat Jan 01 2022 12:00:00 GMT-0300 (Brasilia Standard Time)'
-                }
-              ]
+            return [
+              {
+                id: '49559231-8b89-4d41-bcb0-1421ebf96531',
+                idClient: 'c2e1160e-6bca-4a18-9291-94d04f243160',
+                idService: 'c8fd6b87-fab0-4418-97ea-3deff0baa63b',
+                Year: 2022,
+                Day: 1,
+                Month: 1,
+                Hour: '08:00',
+                Status: 1,
+                Startime: 'Sat Jan 01 2022 08:00:00 GMT-0300 (Brasilia Standard Time)',
+                EndTime: 'Sat Jan 01 2022 10:00:00 GMT-0300 (Brasilia Standard Time)'
+              },
+              {
+                id: '5411c2f1-83a0-4978-83e3-df362d15c625',
+                idClient: 'c2e1160e-6bca-4a18-9291-94d04f243160',
+                idService: 'c8fd6b87-fab0-4418-97ea-3deff0baa63b',
+                Year: 2022,
+                Day: 1,
+                Month: 1,
+                Hour: '08:00',
+                Status: 1,
+                Startime: 'Sat Jan 01 2022 10:00:00 GMT-0300 (Brasilia Standard Time)',
+                EndTime: 'Sat Jan 01 2022 12:00:00 GMT-0300 (Brasilia Standard Time)'
+              }
+            ]
           }
         },
         service: {
           findUnique(data: any) {
-              return {
-                id: "1233456789",
-                idUser: "1",
-                Description: "string",
-                DurationTime: "02:00",
-                Price: 100.0
-              }
+            return {
+              id: "1233456789",
+              idUser: "1",
+              Description: "string",
+              DurationTime: "02:00",
+              Price: 100.0
+            }
           }
         }
       }
@@ -116,6 +116,10 @@ describe('Create a Appointments with service', () => {
       Hour: '01:59'
     }])
 
+    if (creatingAppointmentsAfter instanceof ErrorApp || creatingAppointmentsBefore instanceof ErrorApp) {
+      throw new Error("oi");
+    }
+
     expect(creatingAppointmentsAfter.id).toBe('1233456789');
     expect(creatingAppointmentsAfter.idClient).toBe('1233456789');
     expect(creatingAppointmentsAfter.idService).toBe('1233456789');
@@ -140,6 +144,6 @@ describe('Create a Appointments with service', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(ErrorApp);
     }
-    
+
   });
 })
