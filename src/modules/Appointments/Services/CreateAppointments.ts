@@ -1,17 +1,9 @@
 import { ErrorApp, Errors } from '../../../shared/Errors/Errors';
+import { CreateAppointmentsServiceClass, ICreateAppointmentsProps } from './ICreateAppointments';
 import { Appointments, AppointmentsRepository, IAppointmentsRepository } from '../Repositories/AppointmentsRepository';
 
-interface ICreateAppointments {
-  id: string;
-  idClient: string;
-  idService: string;
-  Year: number;
-  Day: number;
-  Month: number;
-  Hour: string;
-}
 
-export class CreateAppointments {
+export class CreateAppointments implements CreateAppointmentsServiceClass {
 
   protected RepositoryStrategy: IAppointmentsRepository;
 
@@ -19,7 +11,7 @@ export class CreateAppointments {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(AppointmentsProps: ICreateAppointments): Promise<Appointments | ErrorApp> {
+  async create(AppointmentsProps: ICreateAppointmentsProps): Promise<Appointments | ErrorApp> {
 
     const Service = await this.RepositoryStrategy.orm.service.findUnique({
       where: {
@@ -74,7 +66,6 @@ export class CreateAppointments {
         ) {
 
           return new ErrorApp('Appointments conflicted. Not persist new appointment');
-
         }
       }
     });

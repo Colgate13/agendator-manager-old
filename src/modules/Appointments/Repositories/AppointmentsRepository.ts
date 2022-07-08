@@ -1,9 +1,9 @@
-import { IAppointmentsRepository, IfindAppointmens } from '../Interfaces/Repositories';
+import { IAppointmentsRepository, IfindAppointmens } from './IAppointmentsRepository';
 import { PrismaClient, Appointments } from '../../../shared/infra/Prisma';
 
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
 
-export { IAppointmentsRepository } from '../Interfaces/Repositories';
+export { IAppointmentsRepository } from './IAppointmentsRepository';
 export { Appointments } from '../../../shared/infra/Prisma';
 
 export class AppointmentsRepository implements IAppointmentsRepository {

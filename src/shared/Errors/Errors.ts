@@ -1,3 +1,9 @@
+export interface IErrorApp {
+    getMessage(): string;
+    getStatusError(): number;
+    getError(): IGetError;
+}
+
 export interface IGetError {
     message: string;
     statusError: number;
@@ -16,7 +22,7 @@ export const Errors = {
     }
 }
 
-export class ErrorApp {
+export class ErrorApp implements IErrorApp {
     public readonly message: string;
     public readonly statusError: number;
 
