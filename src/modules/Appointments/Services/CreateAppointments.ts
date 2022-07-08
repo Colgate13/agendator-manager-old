@@ -1,4 +1,4 @@
-import { ErrorApp } from '../../../shared/Errors/Errors';
+import { ErrorApp, Errors } from '../../../shared/Errors/Errors';
 import { Appointments, AppointmentsRepository, IAppointmentsRepository } from '../Repositories/AppointmentsRepository';
 
 interface ICreateAppointments {
@@ -19,62 +19,62 @@ export class CreateAppointments {
     this.RepositoryStrategy = RepositoryStrategy;
   }
 
-  async create(AppointmentsProps: ICreateAppointments): Promise<Appointments> {
+  async create(AppointmentsProps: ICreateAppointments): Promise<Appointments | ErrorApp> {
 
     const Service = await this.RepositoryStrategy.orm.service.findUnique({
       where: {
         id: AppointmentsProps.idService
       }
     })
-    
+
     if (!Service) {
-      throw new Error('Service');
+      return new ErrorApp('CreateAppointment do not get Services');
     }
 
-    const AppoitmentsDatabase = await this.RepositoryStrategy.findAppointments({
+    const AppointmentsDatabase = await this.RepositoryStrategy.findAppointments({
       ...AppointmentsProps,
       Service: {
         ...Service
       }
     })
 
-    if (!AppoitmentsDatabase) {
-      throw new Error('AppoitmentsDatabase');
+    if (!AppointmentsDatabase) {
+      return new ErrorApp('Appointments not found data');
     }
-    
+
     const HourTime = Number(AppointmentsProps.Hour.split(':')[0]);
     const MinutesTime = Number(AppointmentsProps.Hour.split(':')[1]);
-    
+
     const HourTimeDuration = Number(Service.DurationTime.split(':')[0]);
     const MinutesTimeDuration = Number(Service.DurationTime.split(':')[1]);
-    
-    const StartimeHour = new Date(AppointmentsProps.Year, AppointmentsProps.Month - 1, AppointmentsProps.Day, HourTime, MinutesTime, 0, 0);
+
+    const startTimeHour = new Date(AppointmentsProps.Year, AppointmentsProps.Month - 1, AppointmentsProps.Day, HourTime, MinutesTime, 0, 0);
     const EndTimeHour = new Date(AppointmentsProps.Year, AppointmentsProps.Month - 1, AppointmentsProps.Day, (HourTime + HourTimeDuration), (MinutesTime + MinutesTimeDuration), 0, 0);
-    
-    AppoitmentsDatabase.forEach((AppoitmentDatabase) => {
+
+    AppointmentsDatabase.forEach((AppointmentsDatabase) => {
 
       if (
-        AppoitmentDatabase.Day === AppointmentsProps.Day 
-        && AppoitmentDatabase.Month === AppointmentsProps.Month 
-        && AppoitmentDatabase.Year === AppointmentsProps.Year
+        AppointmentsDatabase.Day === AppointmentsProps.Day
+        && AppointmentsDatabase.Month === AppointmentsProps.Month
+        && AppointmentsDatabase.Year === AppointmentsProps.Year
       ) {
 
         if (
           (
-            new Date(AppoitmentDatabase.Startime) >= StartimeHour
-            && new Date(AppoitmentDatabase.Startime) < EndTimeHour
+            new Date(AppointmentsDatabase.StartTime) >= startTimeHour
+            && new Date(AppointmentsDatabase.StartTime) < EndTimeHour
           )
 
           ||
 
           (
-            new Date(AppoitmentDatabase.Startime) <= StartimeHour
-            && new Date(AppoitmentDatabase.EndTime) > StartimeHour
+            new Date(AppointmentsDatabase.StartTime) <= startTimeHour
+            && new Date(AppointmentsDatabase.EndTime) > startTimeHour
           )
         ) {
 
-          throw new ErrorApp('Conflito de horario agendamento. Appointment não agendado');
-        
+          return new ErrorApp('Appointments conflicted. Not persist new appointment');
+
         }
       }
     });
@@ -82,15 +82,15 @@ export class CreateAppointments {
 
     const appointment: Appointments = {
       ...AppointmentsProps,
-      Startime: String(StartimeHour),
+      StartTime: String(startTimeHour),
       EndTime: String(EndTimeHour),
       Status: 1
     }
-    
+
     const AppointmentsStorage = await this.RepositoryStrategy.create(appointment);
 
     if (!AppointmentsStorage) {
-      throw new Error('Appointments not created into storage');
+      return new ErrorApp('Appointments' + Errors.services.persist.message, Errors.services.persist.code);
     }
 
     return appointment;
