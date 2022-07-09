@@ -1,6 +1,7 @@
-import { IAppointments, IAppointmentsClassAbstract, IAppointmentsCreate, ServiceAppointment, ISetStartTime } from './IAppointments';
+import { IAppointments, IAppointmentsClass, IAppointmentsCreate, ServiceAppointment, ISetStartTime } from './IAppointments';
+export { IAppointments, IAppointmentsClass, IAppointmentsCreate, ServiceAppointment, ISetStartTime } from './IAppointments';
 
-export class Appointments implements IAppointmentsClassAbstract {
+export class Appointments implements IAppointmentsClass {
 
   public id: string = '';
   public idClient: string = '';
@@ -13,24 +14,81 @@ export class Appointments implements IAppointmentsClassAbstract {
   public StartTime: string = '';
   public EndTime: string = '';
 
-  private constructor(IAppointmentsCreateProps: IAppointmentsCreate) {
+  constructor(IAppointmentsCreate: IAppointmentsCreate, ServiceAppointment: ServiceAppointment) {
 
+    this.id = IAppointmentsCreate.id;
+    this.idClient = IAppointmentsCreate.idClient;
+    this.idService = IAppointmentsCreate.idService;
+    this.Year = IAppointmentsCreate.Year;
+    this.Day = IAppointmentsCreate.Day;
+    this.Month = IAppointmentsCreate.Month;
+    this.Hour = IAppointmentsCreate.Hour;
+    this.Status = IAppointmentsCreate.Status || 1;
+
+    this.SetDates(ServiceAppointment);
   }
 
-  public static create(IAppointmentsProps: IAppointments, ServiceAppointmentProps: ServiceAppointment): Promise<any> {
-
-
-    const a: any = 1;
-    return a;
+  public GetData(): IAppointments {
+    return {
+      id: this.id,
+      idClient: this.idClient,
+      idService: this.idService,
+      Year: this.Year,
+      Day: this.Day,
+      Month: this.Month,
+      Hour: this.Hour,
+      Status: this.Status,
+      StartTime: this.StartTime,
+      EndTime: this.EndTime
+    }
   }
 
-  SetStartTime(ISetStartTimeProps: ISetStartTime): Date {
-    return new Date();
+  SetDates(ServiceAppointment: ServiceAppointment, ISetStartTimeProps: ISetStartTime = {
+    Day: this.Day,
+    Hour: this.Hour,
+    Month: this.Month,
+    Year: this.Year
+  }): string {
+
+    this.Year = ISetStartTimeProps.Year;
+    this.Day = ISetStartTimeProps.Day;
+    this.Month = ISetStartTimeProps.Month;
+    this.Hour = ISetStartTimeProps.Hour;
+
+    const HourTime = Number(this.Hour.split(':')[0]);
+    const MinutesTime = Number(this.Hour.split(':')[1]);
+
+    this.StartTime = String(
+      new Date(
+        this.Year,
+        this.Month - 1,
+        this.Day,
+        HourTime,
+        MinutesTime,
+        0,
+        0
+      )
+    );
+    this.SetEndTime(HourTime, MinutesTime, ServiceAppointment);
+    return this.StartTime;
   }
 
 
-  SetEndTime(ISetStartTimeProps: ISetStartTime): Date {
-    return new Date();
+  SetEndTime(HourTime: number, MinutesTime: number, ServiceAppointment: ServiceAppointment): string {
+
+    this.EndTime = String(
+      new Date(
+        this.Year,
+        this.Month - 1,
+        this.Day,
+        (HourTime + ServiceAppointment.HourDuration),
+        (MinutesTime + ServiceAppointment.MinutesDuration),
+        0,
+        0
+      )
+    );
+
+    return this.EndTime;
   }
 
 }

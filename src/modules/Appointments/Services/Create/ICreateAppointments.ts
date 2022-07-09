@@ -1,5 +1,5 @@
-import { Appointments, AppointmentsRepository, IAppointmentsRepository } from '../Repositories/AppointmentsRepository';
-import { IErrorApp } from '../../../shared/Errors/Errors';
+import { Appointments, AppointmentsRepository, IAppointmentsRepository } from '../../Repositories/AppointmentsRepository';
+import { IErrorApp } from '../../../../shared/Errors/Errors';
 
 export interface CreateAppointmentsServiceClass {
   create(AppointmentsProps: ICreateAppointmentsProps): Promise<Appointments | IErrorApp>;

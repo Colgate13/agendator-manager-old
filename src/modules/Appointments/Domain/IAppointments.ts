@@ -1,7 +1,6 @@
-export abstract class AppointmentsClassAbstract {
-  public static create(IAppointmentsProps: IAppointments, ServiceAppointmentProps: ServiceAppointment): Promise<any>;
-  public SetStartTime(ISetStartTimeProps: ISetStartTime): Date;
-  public SetEndTime(ISetStartTimeProps: ISetStartTime): Date;
+export interface IAppointmentsClass {
+  SetDates(ServiceAppointment: ServiceAppointment, ISetStartTimeProps: ISetStartTime): string;
+  SetEndTime(HourTime: number, MinutesTime: number, ServiceAppointment: ServiceAppointment): string;
 }
 
 export interface IAppointments {
@@ -25,7 +24,7 @@ export interface IAppointmentsCreate {
   Day: number;
   Month: number;
   Hour: string;
-  Status: number;
+  Status?: number;
 }
 
 export interface ISetStartTime {

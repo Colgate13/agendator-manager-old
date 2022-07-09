@@ -30,7 +30,6 @@ export class CreateUser {
     const UserStorage = await this.RepositoryStrategy.create(user);
 
     if (!UserStorage || UserStorage instanceof ErrorApp) {
-      console.log("Oi")
       return new ErrorApp('User-' + Errors.services.persist.message, Errors.services.persist.code);
     }
 

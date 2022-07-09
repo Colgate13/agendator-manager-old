@@ -14,15 +14,15 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   async create(appointments: Appointments): Promise<Appointments | ErrorsDb> {
-    const Appointments = await this.orm.appointments.create({
+    const Appointment = await this.orm.appointments.create({
       data: appointments
     });
 
-    if (!Appointments) {
+    if (!Appointment) {
       return new ErrorsDb('Appointments not created', 3);
     }
 
-    return Appointments;
+    return Appointment;
   }
 
   async findAppointments(Props: IfindAppointmens): Promise<Appointments[]> {
