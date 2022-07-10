@@ -1,5 +1,5 @@
 import { Appointments, PrismaClient } from "@prisma/client";
-import { ErrorsDb } from "../../../../shared/Errors/ErrorsDb";
+import { ErrorsDb } from "../../../shared/Errors/ErrorsDb";
 
 export interface IfindAppointmens {
   Day: number,
