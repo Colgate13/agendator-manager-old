@@ -26,7 +26,6 @@ Projec agendator manager for business.
 <div id="recursos"></div>
 
 - [ ] Criar User(Adm)
-- [ ] Criar Agenda
 - [ ] Criação de Client/ Edição
 - [ ] Client solicitar agendamento em uma agenda
 - [ ] User Confirmar agendamento
