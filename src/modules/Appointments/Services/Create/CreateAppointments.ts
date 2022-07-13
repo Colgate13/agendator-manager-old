@@ -1,7 +1,7 @@
-import { ErrorApp, Errors } from '../../../shared/Errors/Errors';
+import { ErrorApp, Errors } from '../../../../shared/Errors/Errors';
 import { CreateAppointmentsServiceClass } from './ICreateAppointments';
-import { /* Appointments,*/ AppointmentsRepository, IAppointmentsRepository } from '../Repositories/AppointmentsRepository';
-import { Appointments, IAppointmentsCreate } from '../Domain/Appointments';
+import { AppointmentsRepository, IAppointmentsRepository } from '../../Repositories/AppointmentsRepository';
+import { Appointments, IAppointmentsCreate } from '../../Domain/Appointments';
 
 export class CreateAppointments implements CreateAppointmentsServiceClass {
 
@@ -20,7 +20,7 @@ export class CreateAppointments implements CreateAppointmentsServiceClass {
     })
 
     if (!Service) {
-      return new ErrorApp('CreateAppointment do not get Services');
+      return new ErrorApp('Service do not get Services');
     }
 
     const AppointmentsDatabase = await this.RepositoryStrategy.findAppointments({
@@ -40,6 +40,7 @@ export class CreateAppointments implements CreateAppointmentsServiceClass {
       MinutesDuration: Number(Service.DurationTime.split(':')[1])
     })
 
+    let conflictedTime = false;
     AppointmentsDatabase.forEach((AppointmentsDatabase) => {
 
       if (
@@ -60,12 +61,21 @@ export class CreateAppointments implements CreateAppointmentsServiceClass {
             new Date(AppointmentsDatabase.StartTime) <= new Date(appointments.StartTime)
             && new Date(AppointmentsDatabase.EndTime) > new Date(appointments.EndTime)
           )
-        ) {
 
-          return new ErrorApp('Appointments conflicted. Not persist new appointment');
+          ||
+
+          (
+            AppointmentsDatabase.StartTime === appointments.StartTime
+            && AppointmentsDatabase.EndTime === appointments.EndTime
+          )
+        ) {
+          conflictedTime = true;
         }
       }
     });
+
+    if (conflictedTime)
+      return new ErrorApp('Appointments conflicted. Not persist new appointment');
 
     const AppointmentsStorage = await this.RepositoryStrategy.create(appointments);
 

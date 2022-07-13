@@ -1,4 +1,4 @@
-import { IAppointmentsRepository, IfindAppointmens } from './IAppointmentsRepository';
+import { IAppointmentsRepository, IFindAppointment } from './IAppointmentsRepository';
 import { PrismaClient, Appointments } from '../../../shared/infra/Prisma';
 
 import { ErrorsDb } from '../../../shared/Errors/ErrorsDb';
@@ -25,7 +25,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     return Appointment;
   }
 
-  async findAppointments(Props: IfindAppointmens): Promise<Appointments[]> {
+  async findAppointments(Props: IFindAppointment): Promise<Appointments[]> {
     return this.orm.appointments.findMany({
       where: {
         Day: Props.Day,

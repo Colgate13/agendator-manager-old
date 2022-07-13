@@ -1,4 +1,4 @@
-import { CreateAppointments } from './Services/CreateAppointments';
+import { CreateAppointments } from './Services/Create/CreateAppointments';
 import { v4 as uuidv4 } from 'uuid';
 
 (async () => {
@@ -7,8 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
   await createAppointments.create({
     id: `${uuidv4()}`,
-    idClient: 'c2e1160e-6bca-4a18-9291-94d04f243160',
-    idService: 'c8fd6b87-fab0-4418-97ea-3deff0baa63b',
+    idClient: 'a679b76b-d794-4b20-9e59-b2abb3d3c914',
+    idService: '221342e4-65c2-4e94-9080-7a5a5289dc60',
     Day: 1,
     Month: 2,
     Year: 2022,

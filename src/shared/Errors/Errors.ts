@@ -29,6 +29,8 @@ export class ErrorApp implements IErrorApp {
     constructor(message: string, statusError = 1) {
         this.message = message;
         this.statusError = statusError;
+
+        throw new Error(`Error App message: ${message}. Error code: ${statusError}`);
     }
 
     public getMessage(): string {

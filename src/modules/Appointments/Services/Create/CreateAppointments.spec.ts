@@ -1,4 +1,4 @@
-import { ErrorApp } from '../../../shared/Errors/Errors';
+import { ErrorApp } from '../../../../shared/Errors/Errors';
 import { CreateAppointments } from './CreateAppointments';
 
 describe('Create a Appointments with service', () => {
