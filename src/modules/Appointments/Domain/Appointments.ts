@@ -1,29 +1,15 @@
 import { IAppointments, IAppointmentsClass, IAppointmentsCreate, ServiceAppointment, ISetStartTime } from './IAppointments';
+import { AppointmentsAbstract } from './AppointmentsAbstract';
 export { IAppointments, IAppointmentsClass, IAppointmentsCreate, ServiceAppointment, ISetStartTime } from './IAppointments';
 
-export class Appointments implements IAppointmentsClass {
 
-  public id: string = '';
-  public idClient: string = '';
-  public idService: string = '';
-  public Year: number = 1;
-  public Day: number = 1;
-  public Month: number = 1;
-  public Hour: string = '';
-  public Status: number = 1;
+export class Appointments extends AppointmentsAbstract implements IAppointmentsClass {
+
   public StartTime: string = '';
   public EndTime: string = '';
 
   constructor(IAppointmentsCreate: IAppointmentsCreate, ServiceAppointment: ServiceAppointment) {
-
-    this.id = IAppointmentsCreate.id;
-    this.idClient = IAppointmentsCreate.idClient;
-    this.idService = IAppointmentsCreate.idService;
-    this.Year = IAppointmentsCreate.Year;
-    this.Day = IAppointmentsCreate.Day;
-    this.Month = IAppointmentsCreate.Month;
-    this.Hour = IAppointmentsCreate.Hour;
-    this.Status = IAppointmentsCreate.Status || 1;
+    super(IAppointmentsCreate);
 
     this.SetDates(ServiceAppointment);
   }

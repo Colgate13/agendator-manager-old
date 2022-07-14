@@ -3,19 +3,6 @@ export interface IAppointmentsClass {
   SetEndTime(HourTime: number, MinutesTime: number, ServiceAppointment: ServiceAppointment): string;
 }
 
-export interface IAppointments {
-  id: string;
-  idClient: string;
-  idService: string;
-  Year: number;
-  Day: number;
-  Month: number;
-  Hour: string;
-  Status: number;
-  StartTime: string;
-  EndTime: string;
-}
-
 export interface IAppointmentsCreate {
   id: string;
   idClient: string;
@@ -25,6 +12,13 @@ export interface IAppointmentsCreate {
   Month: number;
   Hour: string;
   Status?: number;
+  StartTime?: string;
+  EndTime?: string;
+}
+
+export interface IAppointments extends IAppointmentsCreate {
+  StartTime: string;
+  EndTime: string;
 }
 
 export interface ISetStartTime {
