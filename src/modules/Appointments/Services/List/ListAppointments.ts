@@ -13,15 +13,41 @@ export class ListAppointments {
   async listAppointments(SearchProps: IListAppointment): Promise<AppointmentsAbstract[] | ErrorApp> {
 
     switch (true) {
+      case !!SearchProps.id:
+        return this.ListAppointById(SearchProps.id || null);
+
       case !!SearchProps.idUser:
         return this.ListAppointByUser(SearchProps.idUser || null);
+
       case !!SearchProps.idService:
         return this.ListAppointByService(SearchProps.idService || null);
+
       case !!SearchProps.idClient:
         return this.ListAppointByClient(SearchProps.idClient || null);
+
+      case !!SearchProps.interval:
+      case !!SearchProps.interval.Day:
+      case !!SearchProps.interval.Month:
+      case !!SearchProps.interval.Year:
+        return this.ListAppointByInterval(SearchProps.interval.Day, SearchProps.interval.Month, SearchProps.interval.Year);
+
       default:
         return new ErrorApp('Parameters informed do not sufficient to list appointments');
     }
+  }
+
+  async ListAppointById(id: string | null): Promise<AppointmentsAbstract[] | ErrorApp> {
+    if (!id) {
+      return new ErrorApp('Parameters informed do not sufficient to list appointments by id');
+    }
+
+    const AppointmentsList: AppointmentsAbstract[] = await this.RepositoryStrategy.orm.appointments.findMany({
+      where: {
+        id: id
+      }
+    })
+
+    return AppointmentsList;
   }
 
   async ListAppointByUser(idUser: string | null): Promise<AppointmentsAbstract[] | ErrorApp> {
@@ -66,6 +92,22 @@ export class ListAppointments {
         Client: {
           id: idClient
         }
+      }
+    })
+
+    return AppointmentsList;
+  }
+
+  async ListAppointByInterval(Year: number, Day: number, Month: number): Promise<AppointmentsAbstract[] | ErrorApp> {
+    if (!Year || !Day || !Month) {
+      return new ErrorApp('Parameters informed do not sufficient to list appointments by Interval');
+    }
+
+    const AppointmentsList: AppointmentsAbstract[] = await this.RepositoryStrategy.orm.appointments.findMany({
+      where: {
+        Day,
+        Month,
+        Year
       }
     })
 
