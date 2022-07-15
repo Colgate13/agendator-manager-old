@@ -19,7 +19,7 @@ describe('Create a Business with service', () => {
     }
   }
 
-  const mocks2 = {
+  const mocksBroken = {
     RepositoryStrategy: {
       create: ((data: any) => {
         return null
@@ -43,6 +43,23 @@ describe('Create a Business with service', () => {
     }
 
     expect(creatingBusiness.id).toBe('123456789');
+
+  });
+
+  it('should a not create a Client with service', async () => {
+
+    try {
+      await createBusiness.create.apply(mocksBroken, [{
+        id: '123456789',
+        Phone: '123456789',
+        Email: 'client@gmail.com',
+        Name: 'Teste Client',
+        Birthday: '123',
+        Password: '123'
+      }])
+    } catch (error) {
+      expect(error).toBeInstanceOf(ErrorApp);
+    }
 
   });
 })

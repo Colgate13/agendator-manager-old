@@ -25,11 +25,12 @@ export class ListAppointments {
       case !!SearchProps.idClient:
         return this.ListAppointByClient(SearchProps.idClient || null);
 
-      case !!SearchProps.interval:
-      case !!SearchProps.interval.Day:
-      case !!SearchProps.interval.Month:
-      case !!SearchProps.interval.Year:
-        return this.ListAppointByInterval(SearchProps.interval.Day, SearchProps.interval.Month, SearchProps.interval.Year);
+      // case !!SearchProps.interval:
+      //   return this.ListAppointByInterval(
+      //     SearchProps.interval?.Year || null,
+      //     SearchProps.interval?.Day || null,
+      //     SearchProps.interval?.Month || null
+      //   );
 
       default:
         return new ErrorApp('Parameters informed do not sufficient to list appointments');
@@ -98,20 +99,24 @@ export class ListAppointments {
     return AppointmentsList;
   }
 
-  async ListAppointByInterval(Year: number, Day: number, Month: number): Promise<AppointmentsAbstract[] | ErrorApp> {
-    if (!Year || !Day || !Month) {
-      return new ErrorApp('Parameters informed do not sufficient to list appointments by Interval');
-    }
+  // async ListAppointByInterval(Year: number | null, Day: number | null, Month: number | null): Promise<AppointmentsAbstract[] | ErrorApp> {
+  //   if ((!Year && !Day && !Month) || !Year || !Month) {
+  //     return new ErrorApp('Parameters informed do not sufficient to list appointments by Interval');
+  //   }
 
-    const AppointmentsList: AppointmentsAbstract[] = await this.RepositoryStrategy.orm.appointments.findMany({
-      where: {
-        Day,
-        Month,
-        Year
-      }
-    })
+  //   let where = {}
+  //   if (Year && !Day && !Month) {
+  //     where.Year = Year;
+  //   }
 
-    return AppointmentsList;
-  }
+  //   const AppointmentsList: AppointmentsAbstract[] = await this.RepositoryStrategy.orm.appointments.findMany({
+  //     where: {
+  //       Month,
+  //       Year
+  //     }
+  //   })
+
+  //   return AppointmentsList;
+  // }
 
 }

@@ -3,7 +3,7 @@ export interface IListAppointment {
   idUser?: string,
   idService?: string,
   idClient?: string,
-  interval: {
+  interval?: {
     Year: number,
     Day: number,
     Month: number,
