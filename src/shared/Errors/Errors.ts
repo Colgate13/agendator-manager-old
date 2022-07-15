@@ -30,7 +30,7 @@ export class ErrorApp implements IErrorApp {
         this.message = message;
         this.statusError = statusError;
 
-        throw new Error(`Error App message: ${message}. Error code: ${statusError}`);
+        // throw new Error(`Error App message: ${message}. Error code: ${statusError}`);
     }
 
     public getMessage(): string {

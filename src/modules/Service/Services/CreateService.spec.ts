@@ -47,4 +47,21 @@ describe('Create a Service with service', () => {
     expect(creatingService.Price).toBe(20);
 
   });
+
+  it('should a not create a Service with service', async () => {
+
+    try {
+      await createService.create.apply(mocks2, [{
+        id: '1233456789',
+        idUser: '1233456789',
+        Description: 'Cabelo e Barba',
+        DurationTime: "02:00",
+        Price: 20,
+      }]);
+    } catch (error) {
+      expect(error).toBeInstanceOf(ErrorApp);
+    }
+
+
+  });
 })
