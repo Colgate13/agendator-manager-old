@@ -7,15 +7,15 @@ import { PrismaClient } from '../../../shared/infra/Prisma';
 import { ErrorApp } from '../../../shared/Errors/Errors';
 
 export class UserRepository implements IUserRepository {
-  private prisma: PrismaClient;
+  public orm: PrismaClient;
 
   constructor(ClinetDbStrategy: PrismaClient = new PrismaClient()) {
-    this.prisma = ClinetDbStrategy;
+    this.orm = ClinetDbStrategy;
   }
 
   async create(user: User): Promise<User | ErrorsDb | ErrorApp> {
     try {
-      const User = await this.prisma.user.create({
+      const User = await this.orm.user.create({
         data: user
       });
 

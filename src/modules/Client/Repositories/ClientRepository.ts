@@ -6,14 +6,14 @@ export { IClientRepository } from '../Interfaces/Repositories';
 export { Client } from '../../../shared/infra/Prisma';
 
 export class UserRepository implements IClientRepository {
-  private prisma: PrismaClient;
+  public orm: PrismaClient;
 
   constructor(ClinetDbStrategy: PrismaClient = new PrismaClient()) {
-    this.prisma = ClinetDbStrategy;
+    this.orm = ClinetDbStrategy;
   }
 
   async create(client: Client): Promise<Client | ErrorsDb> {
-    const Client = await this.prisma.client.create({
+    const Client = await this.orm.client.create({
       data: client
     });
 

@@ -25,13 +25,6 @@ export class ListAppointments {
       case !!SearchProps.idClient:
         return this.ListAppointByClient(SearchProps.idClient || null);
 
-      // case !!SearchProps.interval:
-      //   return this.ListAppointByInterval(
-      //     SearchProps.interval?.Year || null,
-      //     SearchProps.interval?.Day || null,
-      //     SearchProps.interval?.Month || null
-      //   );
-
       default:
         return new ErrorApp('Parameters informed do not sufficient to list appointments');
     }

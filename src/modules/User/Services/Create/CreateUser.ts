@@ -1,5 +1,5 @@
-import { ErrorApp, Errors } from '../../../shared/Errors/Errors';
-import { UserRepository, IUserRepository, User } from '../Repositories/UserRepository';
+import { ErrorApp, Errors } from '../../../../shared/Errors/Errors';
+import { UserRepository, IUserRepository, User } from '../../Repositories/UserRepository';
 import { v4 as uuidv4 } from 'uuid';
 
 interface IUserCreate {
@@ -21,6 +21,18 @@ export class CreateUser {
   }
 
   async create(userProps: IUserCreate): Promise<User | ErrorApp> {
+    const UsersEmail = await this.RepositoryStrategy.orm.user.findMany({
+      where: {
+        Email: userProps.Email,
+        OR: {
+          Cpf_cnpj: userProps.Cpf_cnpj,
+        }
+      }
+    });
+
+    if (UsersEmail) {
+      return new ErrorApp('User-Email-CPF-USED');
+    }
 
     const user: User = {
       id: uuidv4(),

@@ -6,14 +6,14 @@ export { Service } from '../../../shared/infra/Prisma';
 export { IServiceRepository } from '../Interfaces/Repositories';
 
 export class ServiceRepository implements IServiceRepository {
-  private prisma: PrismaClient;
+  public orm: PrismaClient;
 
   constructor(ClinetDbStrategy: PrismaClient = new PrismaClient()) {
-    this.prisma = ClinetDbStrategy;
+    this.orm = ClinetDbStrategy;
   }
 
   async create(service: Service): Promise<Service | ErrorsDb> {
-    const Service = await this.prisma.service.create({
+    const Service = await this.orm.service.create({
       data: service
     });
 

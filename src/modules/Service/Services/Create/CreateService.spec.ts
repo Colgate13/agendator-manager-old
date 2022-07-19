@@ -1,4 +1,4 @@
-import { ErrorApp } from '../../../shared/Errors/Errors';
+import { ErrorApp } from '../../../../shared/Errors/Errors';
 import { CreateService } from './CreateService';
 
 describe('Create a Service with service', () => {
@@ -29,7 +29,6 @@ describe('Create a Service with service', () => {
   it('should create a Service with service', async () => {
 
     const creatingService = await createService.create.apply(mocks, [{
-      id: '1233456789',
       idUser: '1233456789',
       Description: 'Cabelo e Barba',
       DurationTime: "02:00",
@@ -40,7 +39,6 @@ describe('Create a Service with service', () => {
       throw new Error();
     }
 
-    expect(creatingService.id).toBe('1233456789');
     expect(creatingService.idUser).toBe('1233456789');
     expect(creatingService.Description).toBe('Cabelo e Barba');
     expect(creatingService.DurationTime).toBe("02:00");
@@ -52,7 +50,6 @@ describe('Create a Service with service', () => {
 
     try {
       await createService.create.apply(mocks2, [{
-        id: '1233456789',
         idUser: '1233456789',
         Description: 'Cabelo e Barba',
         DurationTime: "02:00",

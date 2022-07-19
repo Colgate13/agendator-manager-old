@@ -1,4 +1,4 @@
-import { CreateClient } from './Services/CreateClient';
+import { CreateClient } from './Services/Create/CreateClient';
 import { v4 as uuidv4 } from 'uuid';
 
 (async () => {

@@ -1,14 +1,21 @@
-import { ErrorApp } from '../../../shared/Errors/Errors';
+import { ErrorApp } from '../../../../shared/Errors/Errors';
 import { CreateUser } from './CreateUser';
 
-describe('Create a Business with service', () => {
+describe('Create a User with service', () => {
   const userCreate = new CreateUser();
 
   const mocks = {
     RepositoryStrategy: {
       create: ((data: any) => {
         return data;
-      })
+      }),
+      orm: {
+        user: {
+          findMany: ((data: any) => {
+            return null
+          }),
+        }
+      }
     }
   }
 
@@ -16,7 +23,14 @@ describe('Create a Business with service', () => {
     RepositoryStrategy: {
       create: ((data: any) => {
         return null
-      })
+      }),
+      orm: {
+        user: {
+          findMany: ((data: any) => {
+            return null
+          }),
+        }
+      }
     }
   }
 

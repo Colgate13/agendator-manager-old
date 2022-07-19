@@ -1,4 +1,4 @@
-import { CreateUser } from './Services/CreateUser';
+import { CreateUser } from './Services/Create/CreateUser';
 
 (async () => {
 
