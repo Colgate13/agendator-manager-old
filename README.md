@@ -1,4 +1,4 @@
-<h1 align="center">Agendator-manager</h1>
+<h1 align="center">Agendator-manager Deprecated</h1>
 
 <p align="center">
   <a href="#about">Sobre este projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -25,10 +25,11 @@ Projec agendator manager for business.
 
 <div id="recursos"></div>
 
-- [ ] Criar User(Adm)
-- [ ] Criação de Client/ Edição
-- [ ] Client solicitar agendamento em uma agenda
-- [ ] User Confirmar agendamento
+- [X] 99% Testes Unitarios
+- [X] Criar User(Adm)
+- [X] Criação de Client/ Edição
+- [X] Criação de serviço
+- [X] Client solicitar agendamento em uma agenda
 
 ## License
 
